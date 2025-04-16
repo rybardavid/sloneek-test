@@ -15,6 +15,7 @@ npm-debug.log
 yarn-error.log
 auth.json
 .idea/
+.vscode/
 /app/Http/Modules/Sample
 
 # Ignore local testing stuff
