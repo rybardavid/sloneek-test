@@ -7,6 +7,9 @@ use App\Exceptions\SloneekExceptions\SloneekNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Illuminate\Support\Facades\App;
 
+/**
+ * @extends EntityRepository<Blogger>
+ */
 class BloggerRepository extends EntityRepository
 {
     public static function make(): self
@@ -17,9 +20,8 @@ class BloggerRepository extends EntityRepository
 
     public function get(string $uuid): Blogger
     {
-        /** @var Blogger $entity */
         $entity = $this->find($uuid);
-        if (!$entity) {
+        if (!$entity instanceof Blogger) {
             throw new SloneekNotFoundException(__('be.responses.notFound.blogger'));
         }
 

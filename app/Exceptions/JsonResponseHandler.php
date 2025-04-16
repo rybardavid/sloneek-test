@@ -12,6 +12,7 @@ use Throwable;
 
 class JsonResponseHandler
 {
+    /** @var array<string, mixed> */
     protected array $replacements = [];
 
 
@@ -34,7 +35,7 @@ class JsonResponseHandler
 
         array_walk_recursive(
             $response,
-            function (&$value) use ($exception, $replacements) {
+            function (&$value) use ($replacements) {
                 if (Str::startsWith($value, ':') && isset($replacements[$value])) {
                     $value = $replacements[$value];
                 }
@@ -50,6 +51,9 @@ class JsonResponseHandler
     }
 
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function prepareReplacements(Throwable $exception): array
     {
         $statusCode = $this->getStatusCode($exception);
@@ -95,7 +99,9 @@ class JsonResponseHandler
         return array_merge($replacements, $this->replacements);
     }
 
-
+    /**
+     * @return array<string, mixed>
+     */
     protected function recursivelyRemoveEmptyReplacements(array $input): array
     {
         foreach ($input as &$value) {
@@ -117,6 +123,9 @@ class JsonResponseHandler
     }
 
 
+    /**
+     * @return array<string, string>
+     */
     protected function getHeaders(Throwable $exception): array
     {
         return $exception instanceof HttpExceptionInterface ? $exception->getHeaders() : [];
