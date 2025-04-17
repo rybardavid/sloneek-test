@@ -1,5 +1,7 @@
 <?php
 
+use App\DoctrineTypes\BloggerRoleType;
+
 return [
 
     /*
@@ -105,7 +107,9 @@ return [
     | Create a custom or override a Doctrine Type
     |--------------------------------------------------------------------------
     */
-    'custom_types'               => [],
+    'custom_types'  => [
+        BloggerRoleType::NAME => BloggerRoleType::class,
+    ],
     /*
     |--------------------------------------------------------------------------
     | DQL custom datetime functions
