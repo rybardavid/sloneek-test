@@ -148,6 +148,8 @@ return [
 
         App\Providers\AppServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        LaravelDoctrine\ORM\DoctrineServiceProvider::class,
     ],
 
     'aliases' => []
