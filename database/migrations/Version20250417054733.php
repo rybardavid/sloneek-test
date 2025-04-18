@@ -26,6 +26,7 @@ final class Version20250417054733 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_BFDD31683590D879 ON articles (author_uuid)');
         $this->addSql('CREATE INDEX IDX_BFDD31685AE42AE1 ON articles (category_uuid)');
 
+        $this->addSql('DROP TYPE IF EXISTS blogger_role;');
         $this->addSql('CREATE TYPE blogger_role AS ENUM (\'admin\', \'blogger\')');
         $this->addSql('CREATE TABLE bloggers (uuid UUID NOT NULL, name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, role blogger_role NOT NULL, created TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, removed TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(uuid))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_55A2B56FE7927C74 ON bloggers (email)');
