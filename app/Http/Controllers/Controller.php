@@ -9,47 +9,42 @@ abstract class Controller
 {
     protected function jsonResponse(
         int $status,
-        string $message = null,
+        ?string $message = null,
         array $data = [],
         array $errors = []
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $responseData = collect(
             [
-                'message'     => $message,
+                'message' => $message,
                 'status_code' => $status,
-                'data'        => $data,
-                'errors'      => $errors
+                'data' => $data,
+                'errors' => $errors,
             ]
         );
 
         return response()->json($responseData->toArray(), $status);
     }
 
-
-    protected function successResponse(array $data = [], string $message = null): JsonResponse
+    protected function successResponse(array $data = [], ?string $message = null): JsonResponse
     {
         return $this->jsonResponse(
-            status:  Response::HTTP_OK,
+            status: Response::HTTP_OK,
             message: $message ?? __('be.responses.ok'),
-            data:    $data
+            data: $data
         );
     }
-
 
     protected function noContentResponse(): JsonResponse
     {
         return $this->jsonResponse(status: Response::HTTP_NO_CONTENT);
     }
 
-
-    protected function errorResponse(string $message = null, array $errors = []): JsonResponse
+    protected function errorResponse(?string $message = null, array $errors = []): JsonResponse
     {
         return $this->jsonResponse(
-            status:  Response::HTTP_BAD_REQUEST,
+            status: Response::HTTP_BAD_REQUEST,
             message: $message ?? __('be.responses.badRequest'),
-            errors:  $errors
+            errors: $errors
         );
     }
-
 }

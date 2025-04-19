@@ -31,7 +31,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function runBeforeClassMethodsOnce(): void
     {
-        if (!static::$beforeClassRun) {
+        if (! static::$beforeClassRun) {
             $this->runAttributeMethods(BeforeTestClass::class);
             static::$beforeClassRun = true;
         }
@@ -42,7 +42,7 @@ abstract class TestCase extends BaseTestCase
     {
         $ref = new ReflectionClass($this);
         foreach ($ref->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-            if (!empty($method->getAttributes($attributeClass))) {
+            if (! empty($method->getAttributes($attributeClass))) {
                 try {
                     $method->invoke($this);
                 } catch (Throwable $e) {
@@ -51,5 +51,4 @@ abstract class TestCase extends BaseTestCase
             }
         }
     }
-
 }

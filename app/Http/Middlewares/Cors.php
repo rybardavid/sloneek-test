@@ -10,10 +10,10 @@ class Cors
     public function handle(Request $request, Closure $next)
     {
         $headers = [
-            'Access-Control-Allow-Origin'      => config('cors.allow_origin', '*'),
-            'Access-Control-Allow-Methods'     => config('cors.allow_methods', 'GET,POST,PATCH,PUT,DELETE,OPTIONS'),
+            'Access-Control-Allow-Origin' => config('cors.allow_origin', '*'),
+            'Access-Control-Allow-Methods' => config('cors.allow_methods', 'GET,POST,PATCH,PUT,DELETE,OPTIONS'),
             'Access-Control-Allow-Credentials' => config('cors.allow_credentials', true),
-            'Access-Control-Allow-Headers'     => config('cors.allow_headers', 'Content-Type,Authorization'),
+            'Access-Control-Allow-Headers' => config('cors.allow_headers', 'Content-Type,Authorization'),
         ];
 
         if ($request->isMethod('OPTIONS')) {
@@ -27,5 +27,4 @@ class Cors
 
         return $response;
     }
-
 }

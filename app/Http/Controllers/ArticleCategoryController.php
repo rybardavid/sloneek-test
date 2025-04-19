@@ -2,7 +2,4 @@
 
 namespace App\Http\Controllers;
 
-class ArticleCategoryController extends Controller
-{
-
-}
+class ArticleCategoryController extends Controller {}

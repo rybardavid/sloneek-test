@@ -25,53 +25,45 @@ abstract class BaseEntity
     protected DateTime $created;
 
     /** @ORM\Column(type="datetime", nullable=true) */
-    protected DateTime|null $updated = null;
+    protected ?DateTime $updated = null;
 
     /** @ORM\Column(type="datetime", nullable=true) */
-    protected DateTime|null $removed = null;
-
+    protected ?DateTime $removed = null;
 
     public function getUuid(): string
     {
         return $this->uuid;
     }
 
-
     public function getCreated(): DateTime
     {
         return $this->created;
     }
-
 
     public function setCreated(DateTime $created): void
     {
         $this->created = $created;
     }
 
-
     public function getUpdated(): ?DateTime
     {
         return $this->updated;
     }
-
 
     public function setUpdated(?DateTime $updated): void
     {
         $this->updated = $updated;
     }
 
-
     public function getRemoved(): ?DateTime
     {
         return $this->removed;
     }
 
-
     public function setRemoved(?DateTime $removed): void
     {
         $this->removed = $removed;
     }
-
 
     /** @ORM\PrePersist */
     public function prePersist(PrePersistEventArgs $args): void
@@ -79,11 +71,9 @@ abstract class BaseEntity
         $this->setCreated(now());
     }
 
-
     /** @ORM\PreUpdate */
     public function preUpdate(PreUpdateEventArgs $args): void
     {
         $this->setUpdated(now());
     }
-
 }

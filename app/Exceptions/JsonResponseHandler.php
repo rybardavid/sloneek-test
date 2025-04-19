@@ -15,7 +15,6 @@ class JsonResponseHandler
     /** @var array<string, mixed> */
     protected array $replacements = [];
 
-
     public function handle(Throwable $exception): Response
     {
         // Convert Eloquent 500 ModelNotFoundException into a 404 NotFoundHttpException
@@ -25,7 +24,6 @@ class JsonResponseHandler
 
         return $this->genericResponse($exception)->withException($exception);
     }
-
 
     protected function genericResponse(Throwable $exception): Response
     {
@@ -43,13 +41,12 @@ class JsonResponseHandler
         );
 
         $response = $this->recursivelyRemoveEmptyReplacements($response);
-        if (!array_key_exists('errors', $response)) {
+        if (! array_key_exists('errors', $response)) {
             $response['errors'] = [];
         }
 
         return new Response($response, $this->getStatusCode($exception), $this->getHeaders($exception));
     }
-
 
     /**
      * @return array<string, mixed>
@@ -58,12 +55,12 @@ class JsonResponseHandler
     {
         $statusCode = $this->getStatusCode($exception);
 
-        if (!$message = $exception->getMessage()) {
+        if (! $message = $exception->getMessage()) {
             $message = sprintf('%d %s', $statusCode, Response::$statusTexts[$statusCode]);
         }
 
         $replacements = [
-            ':message'     => $message,
+            ':message' => $message,
             ':status_code' => $statusCode,
         ];
 
@@ -79,19 +76,19 @@ class JsonResponseHandler
 
         if (config('app.debug') === true) {
             $replacements[':debug'] = [
-                'line'  => $exception->getLine(),
-                'file'  => $exception->getFile(),
+                'line' => $exception->getLine(),
+                'file' => $exception->getFile(),
                 'class' => get_class($exception),
                 'trace' => explode("\n", $exception->getTraceAsString()),
             ];
 
             // Attach trace of previous exception, if exists
-            if (!is_null($exception->getPrevious())) {
+            if (! is_null($exception->getPrevious())) {
                 $currentTrace = $replacements[':debug']['trace'];
 
                 $replacements[':debug']['trace'] = [
                     'previous' => explode("\n", $exception->getPrevious()->getTraceAsString()),
-                    'current'  => $currentTrace,
+                    'current' => $currentTrace,
                 ];
             }
         }
@@ -114,14 +111,13 @@ class JsonResponseHandler
             $input,
             function ($value) {
                 if (is_string($value)) {
-                    return !Str::startsWith($value, ':');
+                    return ! Str::startsWith($value, ':');
                 }
 
                 return true;
             }
         );
     }
-
 
     /**
      * @return array<string, string>
@@ -130,7 +126,6 @@ class JsonResponseHandler
     {
         return $exception instanceof HttpExceptionInterface ? $exception->getHeaders() : [];
     }
-
 
     protected function getStatusCode(Throwable $exception): int
     {
@@ -141,16 +136,14 @@ class JsonResponseHandler
         return $exception instanceof HttpExceptionInterface ? $exception->getStatusCode() : 500;
     }
 
-
     protected function newResponseArray(): array
     {
         return [
-            'message'     => ':message',
+            'message' => ':message',
             'status_code' => ':status_code',
-            'data'        => [],
-            'errors'      => ':errors',
-            'debug'       => ':debug',
+            'data' => [],
+            'errors' => ':errors',
+            'debug' => ':debug',
         ];
     }
-
 }

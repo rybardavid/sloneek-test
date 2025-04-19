@@ -16,7 +16,7 @@ class UuidGenerator extends AbstractIdGenerator
     /**
      * Generate an identifier
      *
-     * @param object | null $entity
+     * @param  object | null  $entity
      *
      * @throws Exception
      */
@@ -24,5 +24,4 @@ class UuidGenerator extends AbstractIdGenerator
     {
         return Uuid::uuid4();
     }
-
 }
