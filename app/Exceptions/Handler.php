@@ -22,7 +22,6 @@ class Handler extends ExceptionHandler
     protected $dontReport = [
     ];
 
-
     /**
      * Render an exception into an HTTP response.
      *
@@ -46,7 +45,7 @@ class Handler extends ExceptionHandler
             throw new SloneekInternalErrorException();
         }
 
-        if (!method_exists($e, 'render')) {
+        if (! method_exists($e, 'render')) {
             $handler = new JsonResponseHandler();
 
             return $handler->handle($e);
@@ -54,5 +53,4 @@ class Handler extends ExceptionHandler
 
         return parent::render($request, $e);
     }
-
 }

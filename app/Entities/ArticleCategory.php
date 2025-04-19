@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  * @ORM\Entity
  */
@@ -59,12 +58,12 @@ class ArticleCategory extends BaseEntity
 
     public function addBlogger(Blogger $blogger): self
     {
-        if (!$this->bloggers->contains($blogger)) {
+        if (! $this->bloggers->contains($blogger)) {
             $this->bloggers->add($blogger);
         }
+
         return $this;
     }
-
 
     /**
      * @return Collection<int, Article>
@@ -76,10 +75,10 @@ class ArticleCategory extends BaseEntity
 
     public function addArticle(Article $article): self
     {
-        if (!$this->articles->contains($article)) {
+        if (! $this->articles->contains($article)) {
             $this->articles->add($article);
         }
+
         return $this;
     }
-
 }

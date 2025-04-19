@@ -44,9 +44,9 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth'     => Authenticate::class,
-//        'bindings' => SubstituteBindings::class,
-        'can'      => Authorize::class,
+        'auth' => Authenticate::class,
+        //        'bindings' => SubstituteBindings::class,
+        'can' => Authorize::class,
         'throttle' => ThrottleRequests::class,
     ];
 
@@ -60,7 +60,6 @@ class Kernel extends HttpKernel
     protected $middlewarePriority = [
         ThrottleRequests::class,
         Cors::class,
-//        SubstituteBindings::class,
+        //        SubstituteBindings::class,
     ];
-
 }

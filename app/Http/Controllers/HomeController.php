@@ -8,14 +8,13 @@ class HomeController extends Controller
 {
     public function getVersion(): JsonResponse
     {
-        $composerData = json_decode(file_get_contents(base_path() . '/composer.json'), true);
+        $composerData = json_decode(file_get_contents(base_path().'/composer.json'), true);
 
         return $this->successResponse(
             [
-                'name'        => $composerData['name'],
-                'description' => $composerData['description']
+                'name' => $composerData['name'],
+                'description' => $composerData['description'],
             ]
         );
     }
-
 }

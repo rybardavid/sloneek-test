@@ -8,15 +8,16 @@ use Tests\Support\Attributes\BeforeTest;
 
 trait RefreshDatabaseDoctrine
 {
-
-    #[BeforeTest] public function beginTransaction(): void
+    #[BeforeTest]
+    public function beginTransaction(): void
     {
         app(EntityManagerInterface::class)
             ->getConnection()
             ->beginTransaction();
     }
 
-    #[AfterTest] public function rollbackTransaction(): void
+    #[AfterTest]
+    public function rollbackTransaction(): void
     {
         $em = app(EntityManagerInterface::class);
         $conn = $em->getConnection();
@@ -27,4 +28,4 @@ trait RefreshDatabaseDoctrine
 
         $em->clear();
     }
-} 
+}

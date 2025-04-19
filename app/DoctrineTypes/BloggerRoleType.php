@@ -13,18 +13,16 @@ class BloggerRoleType extends Type
     public const NAME = 'blogger_role';
 
     /**
-     * @param array<string, mixed> $column
-     * @param AbstractPlatform $platform
+     * @param  array<string, mixed>  $column
      */
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
-        return "blogger_role";
+        return 'blogger_role';
     }
 
     /**
-     * @param mixed $value
-     * @param AbstractPlatform $platform
-     * @return BloggerRole|null
+     * @param  mixed  $value
+     *
      * @throws ConversionException
      */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?BloggerRole
@@ -33,14 +31,14 @@ class BloggerRoleType extends Type
             return null;
         }
 
-        if (!is_string($value) && !is_int($value)) {
-            throw new ConversionException("Invalid value type for BloggerRole: " . var_export($value, true));
+        if (! is_string($value) && ! is_int($value)) {
+            throw new ConversionException('Invalid value type for BloggerRole: '.var_export($value, true));
         }
 
         try {
             return BloggerRole::from($value);
         } catch (ValueError $e) {
-            throw new ConversionException("Invalid value for BloggerRole: " . var_export($value, true));
+            throw new ConversionException('Invalid value for BloggerRole: '.var_export($value, true));
         }
     }
 

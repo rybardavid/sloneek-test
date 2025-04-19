@@ -2,7 +2,4 @@
 
 namespace App\Http\Controllers;
 
-class SubscriberController extends Controller
-{
-
-}
+class SubscriberController extends Controller {}
