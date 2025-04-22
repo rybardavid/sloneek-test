@@ -4,6 +4,7 @@ namespace App\Entities;
 
 use App\EntityRepositories\BloggerRepository;
 use App\Enums\BloggerRole;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -44,10 +45,14 @@ class Blogger extends BaseEntity
      */
     private Collection $articles;
 
-    public function __construct()
+    public function __construct(string $name, string $email, BloggerRole $role)
     {
+        $this->name = $name;
+        $this->email = $email;
+        $this->role = $role;
         $this->categories = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->created = new DateTime();
     }
 
     public function setName(string $name): void
@@ -82,7 +87,9 @@ class Blogger extends BaseEntity
 
     public function addCategory(ArticleCategory $category): void
     {
-        $this->categories[] = $category;
+        if (! $this->categories->contains($category)) {
+            $this->categories->add($category);
+        }
     }
 
     /**
@@ -93,9 +100,16 @@ class Blogger extends BaseEntity
         return $this->categories;
     }
 
+    public function containsCategory(ArticleCategory $category): bool
+    {
+        return $this->categories->contains($category);
+    }
+
     public function addArticle(Article $article): void
     {
-        $this->articles[] = $article;
+        if (! $this->articles->contains($article)) {
+            $this->articles->add($article);
+        }
     }
 
     /**

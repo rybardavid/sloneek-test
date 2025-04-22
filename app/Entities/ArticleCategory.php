@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -34,6 +35,7 @@ class ArticleCategory extends BaseEntity
 
     public function __construct()
     {
+        $this->created = new DateTime();
         $this->bloggers = new ArrayCollection();
         $this->articles = new ArrayCollection();
     }

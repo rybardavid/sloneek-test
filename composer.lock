@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e76c949b7275bb8b76f50e207f3e23bb",
+    "content-hash": "36bf6870a22a3c9a470d0e88d274389a",
     "packages": [
         {
             "name": "brick/math",
@@ -9602,6 +9602,68 @@
                 }
             ],
             "time": "2024-07-03T05:13:08+00:00"
+        },
+        {
+            "name": "swisnl/phpstan-faker",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swisnl/phpstan-faker.git",
+                "reference": "3c1b6982d9c84278b6961e6d1d42285aad035c96"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swisnl/phpstan-faker/zipball/3c1b6982d9c84278b6961e6d1d42285aad035c96",
+                "reference": "3c1b6982d9c84278b6961e6d1d42285aad035c96",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.4|^8.0",
+                "phpstan/phpstan": "^1.0|^2.0"
+            },
+            "require-dev": {
+                "fakerphp/faker": "^1.21",
+                "laravel/pint": "^1.2",
+                "phpunit/phpunit": "^9.6"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Swis\\PHPStan\\Reflection\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rolf van de Krol",
+                    "email": "rvandekrol@swis.nl",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHPStan Reflection extension for custom Faker providers",
+            "homepage": "https://github.com/swisnl/phpstan-faker",
+            "keywords": [
+                "PHPStan",
+                "faker",
+                "reflection",
+                "testing"
+            ],
+            "support": {
+                "issues": "https://github.com/swisnl/phpstan-faker/issues",
+                "source": "https://github.com/swisnl/phpstan-faker/tree/1.1.0"
+            },
+            "time": "2024-12-05T07:38:31+00:00"
         },
         {
             "name": "theseer/tokenizer",

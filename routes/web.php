@@ -28,3 +28,8 @@ Route::controller(ArticleCategoryController::class)
     ->group(function () {
         //TODO: add article category endpoints
     });
+
+Route::prefix('api')->group(function () {
+    Route::apiResource('articles', ArticleController::class);
+    Route::post('articles/{uuid}/publish', [ArticleController::class, 'publish']);
+});

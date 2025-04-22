@@ -39,6 +39,7 @@ class Article extends BaseEntity
 
     public function __construct(Blogger $author, ArticleCategory $category)
     {
+        $this->created = new DateTime();
         $this->author = $author;
         $author->addArticle($this);
         $this->category = $category;
@@ -75,9 +76,9 @@ class Article extends BaseEntity
         return $this->publishedAt;
     }
 
-    public function isEditable(): bool
+    public function isPublished(): bool
     {
-        return $this->publishedAt === null;
+        return $this->publishedAt !== null;
     }
 
     public function getAuthor(): Blogger
@@ -93,5 +94,10 @@ class Article extends BaseEntity
     public function getCategory(): ArticleCategory
     {
         return $this->category;
+    }
+
+    public function delete(): void
+    {
+        $this->removed = new DateTime();
     }
 }

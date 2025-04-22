@@ -148,6 +148,7 @@ return [
 
         App\Providers\AppServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\DoctrineRepositoryServiceProvider::class,
 
         LaravelDoctrine\ORM\DoctrineServiceProvider::class,
     ],

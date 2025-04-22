@@ -17,6 +17,9 @@ class BloggerRepository extends EntityRepository
         return App::make(self::class);
     }
 
+    /**
+     * @throws SloneekNotFoundException
+     */
     public function get(string $uuid): Blogger
     {
         $entity = $this->find($uuid);
@@ -26,6 +29,4 @@ class BloggerRepository extends EntityRepository
 
         return $entity;
     }
-
-    //TODO: implement other queries
 }

@@ -1,5 +1,6 @@
 includes:
     - vendor/nunomaduro/larastan/extension.neon
+    - vendor/swisnl/phpstan-faker/extension.neon
     - phpstan-baseline.neon
 
 parameters:
@@ -14,3 +15,6 @@ parameters:
     excludePaths:
         - vendor/*
         - storage/*
+    faker:
+        providerClasses:
+            - Database\Faker\ArticleCategoryProvider
