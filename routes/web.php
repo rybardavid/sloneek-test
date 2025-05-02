@@ -10,8 +10,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'getVersion']);
 
 Route::controller(AuthController::class)
+    ->prefix('api')
     ->group(function () {
-        //TODO: add auth endpoints
+        Route::post('login', 'login');
+        Route::post('register', 'register');
+        Route::post('logout', 'logout')->middleware('auth:api');
+        Route::post('refresh', 'refresh')->middleware('auth:api');
+        Route::get('me', 'me')->middleware('auth:api');
     });
 
 Route::controller(SubscriberController::class)

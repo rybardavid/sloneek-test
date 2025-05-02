@@ -8,12 +8,16 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Illuminate\Auth\Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * @ORM\Entity(repositoryClass=BloggerRepository::class)
  */
-class Blogger extends BaseEntity
+class Blogger extends BaseEntity implements \Illuminate\Contracts\Auth\Authenticatable, JWTSubject
 {
+    use Authenticatable;
+
     /**
      * @ORM\Column(type="string")
      */
@@ -23,6 +27,11 @@ class Blogger extends BaseEntity
      * @ORM\Column(type="string", unique=true)
      */
     private string $email;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private string $password;
 
     /**
      * @ORM\Column(type="blogger_role")
@@ -45,11 +54,12 @@ class Blogger extends BaseEntity
      */
     private Collection $articles;
 
-    public function __construct(string $name, string $email, BloggerRole $role)
+    public function __construct(string $name, string $email, string $password, BloggerRole $role)
     {
         $this->name = $name;
         $this->email = $email;
         $this->role = $role;
+        $this->password = $password;
         $this->categories = new ArrayCollection();
         $this->articles = new ArrayCollection();
         $this->created = new DateTime();
@@ -73,6 +83,16 @@ class Blogger extends BaseEntity
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
     }
 
     public function setRole(BloggerRole $role): void
@@ -118,5 +138,22 @@ class Blogger extends BaseEntity
     public function getArticles(): Collection
     {
         return $this->articles;
+    }
+
+    public function getJWTIdentifier(): string
+    {
+        return $this->getUuid();
+    }
+
+    /**
+     * @return array<string, string|int>
+     */
+    public function getJWTCustomClaims(): array
+    {
+        return [
+            'uuid' => $this->getUuid(),
+            'name' => $this->getName(),
+            'sub' => $this->getUuid(),
+        ];
     }
 }
